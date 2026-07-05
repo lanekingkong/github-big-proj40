@@ -1,0 +1,137 @@
+# ============================================
+# AgentForge - Electron Builder Configuration
+# ============================================
+
+appId: com.agentforge.app
+productName: AgentForge
+copyright: "Copyright © 2024 AgentForge Contributors"
+
+# ===== File Patterns =====
+files:
+  - dist/**/*
+  - package.json
+
+# Exclude development files from the packaged app
+asar: true
+asarUnpack:
+  - "**/*.node"
+  - "backend/**/*"
+
+# ===== Directories =====
+directories:
+  output: release
+  buildResources: build
+
+# ===== Extra Resources (Python backend) =====
+extraResources:
+  - from: backend/
+    to: backend/
+    filter:
+      - "**/*"
+      - "!__pycache__"
+      - "!*.pyc"
+      - "!*.pyo"
+      - "!.venv"
+
+# ===== Windows Configuration =====
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+    - target: portable
+      arch:
+        - x64
+  icon: build/icon.ico
+  artifactName: "${productName}-${version}-win-${arch}.${ext}"
+
+nsis:
+  oneClick: false
+  perMachine: false
+  allowToChangeInstallationDirectory: true
+  deleteAppDataOnUninstall: false
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: AgentForge
+  installerIcon: build/icon.ico
+  uninstallerIcon: build/icon.ico
+  installerHeaderIcon: build/icon.ico
+
+# ===== macOS Configuration =====
+mac:
+  target:
+    - target: dmg
+      arch:
+        - x64
+        - arm64
+    - target: zip
+      arch:
+        - x64
+        - arm64
+  icon: build/icon.icns
+  category: public.app-category.developer-tools
+  artifactName: "${productName}-${version}-mac-${arch}.${ext}"
+  hardenedRuntime: true
+  entitlements: build/entitlements.mac.plist
+  entitlementsInherit: build/entitlements.mac.plist
+
+dmg:
+  title: "${productName} ${version}"
+  iconSize: 100
+  contents:
+    - x: 130
+      y: 220
+    - x: 410
+      y: 220
+      type: link
+      path: /Applications
+
+# ===== Linux Configuration =====
+linux:
+  target:
+    - target: AppImage
+      arch:
+        - x64
+    - target: deb
+      arch:
+        - x64
+    - target: rpm
+      arch:
+        - x64
+  icon: build/icon.png
+  category: Development
+  artifactName: "${productName}-${version}-linux-${arch}.${ext}"
+  maintainer: agentforge@example.com
+  synopsis: Multi-Agent Collaborative Orchestration Platform
+
+appImage:
+  systemIntegration: doNotAsk
+
+deb:
+  depends:
+    - libgtk-3-0
+    - libnotify4
+    - libnss3
+    - libxss1
+    - libxtst6
+    - xdg-utils
+    - libatspi2.0-0
+    - libsecret-1-0
+
+rpm:
+  depends:
+    - gtk3
+    - libnotify
+    - nss
+    - libXScrnSaver
+    - libXtst
+    - xdg-utils
+    - at-spi2-core
+    - libsecret
+
+# ===== Publish Configuration =====
+publish:
+  provider: github
+  owner: your-org
+  repo: agentforge
+  releaseType: draft
