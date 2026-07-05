@@ -1,0 +1,359 @@
+/**
+ * AgentForge Global Styles
+ * ========================
+ * TailwindCSS directives, CSS custom properties (design tokens),
+ * dark mode support, custom scrollbar styling, and base resets.
+ */
+
+/* ------------------------------------------------------------------ */
+/* TailwindCSS Directives                                               */
+/* ------------------------------------------------------------------ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/* Design Tokens — CSS Custom Properties                                */
+/* ------------------------------------------------------------------ */
+:root {
+  /* ---- Color Palette ---- */
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+
+  --color-accent-50: #fdf4ff;
+  --color-accent-100: #fae8ff;
+  --color-accent-200: #f5d0fe;
+  --color-accent-300: #f0abfc;
+  --color-accent-400: #e879f9;
+  --color-accent-500: #d946ef;
+  --color-accent-600: #c026d3;
+  --color-accent-700: #a21caf;
+  --color-accent-800: #86198f;
+  --color-accent-900: #701a75;
+
+  --color-success-400: #4ade80;
+  --color-success-500: #22c55e;
+  --color-warning-400: #facc15;
+  --color-warning-500: #eab308;
+  --color-danger-400: #f87171;
+  --color-danger-500: #ef4444;
+
+  /* ---- Surface Colors ---- */
+  --surface-bg: #f8fafc;
+  --surface-card: #ffffff;
+  --surface-sidebar: #f1f5f9;
+  --surface-hover: #e2e8f0;
+  --surface-active: #cbd5e1;
+  --surface-border: #e2e8f0;
+  --surface-overlay: rgba(15, 23, 42, 0.4);
+
+  /* ---- Text Colors ---- */
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-tertiary: #94a3b8;
+  --text-inverse: #f8fafc;
+  --text-link: #2563eb;
+
+  /* ---- Spacing Scale ---- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* ---- Typography ---- */
+  --font-sans: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
+
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+
+  /* ---- Shadows ---- */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+    0 8px 10px -6px rgba(0, 0, 0, 0.1);
+
+  /* ---- Border Radius ---- */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-full: 9999px;
+
+  /* ---- Transitions ---- */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 350ms ease;
+
+  /* ---- Layout ---- */
+  --sidebar-width: 240px;
+  --header-height: 52px;
+  --panel-min-width: 280px;
+  --canvas-min-width: 400px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Dark Mode                                                             */
+/* ------------------------------------------------------------------ */
+.dark {
+  --surface-bg: #0f172a;
+  --surface-card: #1e293b;
+  --surface-sidebar: #1e293b;
+  --surface-hover: #334155;
+  --surface-active: #475569;
+  --surface-border: #334155;
+  --surface-overlay: rgba(0, 0, 0, 0.6);
+
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
+  --text-inverse: #0f172a;
+  --text-link: #60a5fa;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4),
+    0 2px 4px -2px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4),
+    0 4px 6px -4px rgba(0, 0, 0, 0.3);
+}
+
+/* ------------------------------------------------------------------ */
+/* Base Resets                                                           */
+/* ------------------------------------------------------------------ */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text-primary);
+    background-color: var(--surface-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow: hidden; /* Managed by app layout */
+  }
+
+  #root {
+    width: 100%;
+    height: 100vh;
+  }
+
+  a {
+    color: var(--text-link);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--surface-active);
+    border-radius: var(--radius-full);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--text-tertiary);
+  }
+
+  /* Selection color */
+  ::selection {
+    background-color: var(--color-primary-200);
+    color: var(--color-primary-900);
+  }
+
+  .dark ::selection {
+    background-color: var(--color-primary-800);
+    color: var(--color-primary-100);
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Utility Components                                                    */
+/* ------------------------------------------------------------------ */
+@layer components {
+  /* Glass-morphism panel */
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--surface-border);
+    box-shadow: var(--shadow-md);
+  }
+
+  .dark .glass-panel {
+    background: rgba(30, 41, 59, 0.8);
+  }
+
+  /* Status badge */
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    padding: 2px var(--space-2);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .status-badge--online {
+    background: rgba(34, 197, 94, 0.15);
+    color: var(--color-success-500);
+  }
+
+  .status-badge--offline {
+    background: rgba(148, 163, 184, 0.15);
+    color: var(--text-tertiary);
+  }
+
+  .status-badge--error {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--color-danger-500);
+  }
+
+  .status-badge--warning {
+    background: rgba(234, 179, 8, 0.15);
+    color: var(--color-warning-500);
+  }
+
+  /* Animated pulse dot */
+  .pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
+    background-color: var(--color-success-500);
+    position: relative;
+  }
+
+  .pulse-dot::after {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: inherit;
+    background-color: inherit;
+    opacity: 0.4;
+    animation: pulse-ring 2s ease-out infinite;
+  }
+
+  @keyframes pulse-ring {
+    0% {
+      transform: scale(1);
+      opacity: 0.6;
+    }
+    100% {
+      transform: scale(2.5);
+      opacity: 0;
+    }
+  }
+
+  /* Code block styling */
+  .code-block {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    background: #1e293b;
+    color: #e2e8f0;
+    padding: var(--space-3) var(--space-4);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+  }
+
+  /* Forge node base */
+  .forge-node {
+    background: var(--surface-card);
+    border: 2px solid var(--surface-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-3) var(--space-4);
+    min-width: 180px;
+    box-shadow: var(--shadow-md);
+    transition: box-shadow var(--transition-fast),
+      border-color var(--transition-fast);
+  }
+
+  .forge-node:hover {
+    box-shadow: var(--shadow-lg);
+    border-color: var(--color-primary-400);
+  }
+
+  .forge-node.selected {
+    border-color: var(--color-primary-500);
+    box-shadow: 0 0 0 2px var(--color-primary-200);
+  }
+
+  /* Log entry */
+  .log-entry {
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+
+  .log-entry--info {
+    color: var(--text-secondary);
+  }
+
+  .log-entry--warn {
+    background: rgba(234, 179, 8, 0.1);
+    color: #b45309;
+  }
+
+  .dark .log-entry--warn {
+    color: #fbbf24;
+  }
+
+  .log-entry--error {
+    background: rgba(239, 68, 68, 0.1);
+    color: #b91c1c;
+  }
+
+  .dark .log-entry--error {
+    color: #f87171;
+  }
+}
